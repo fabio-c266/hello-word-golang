@@ -1,3 +1,3 @@
 # Hello world in Golang
 
-My first project to the learning in golang
+My first project for the learning in golang
