@@ -2,14 +2,37 @@ package main
 
 import "fmt"
 
+func startMonitoring() {
+	println("Monitoring started")
+}
+
+func showLogs() {
+	println("Showing Logs")
+}
+
 func main() {
-	fmt.Println("Sistema de monitoramento")
-	fmt.Println("1- Iniciar monitoramento")
-	fmt.Println("2- Exibir logs")
-	fmt.Println("3- Sair do programa")
+	println("Monitoring System")
+	println("1- Start monitoring")
+	println("2- Show logs")
+	println("3- End system")
 
-	var optionInputed int
-	fmt.Scan(&optionInputed)
+	endSystem := false
 
-	fmt.Println(optionInputed)
+	for !endSystem {
+		var optionInputed int
+		fmt.Scan(&optionInputed)
+
+		switch optionInputed {
+		case 1:
+			startMonitoring()
+		case 2:
+			showLogs()
+		case 3:
+			println("Ending system...")
+			println("System ended")
+			endSystem = true
+		default:
+			println("Invalid option. Try again")
+		}
+	}
 }
