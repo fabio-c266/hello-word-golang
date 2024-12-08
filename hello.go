@@ -11,16 +11,16 @@ import (
 
 const websitesFileName = "websites.txt"
 const logsFileName = "logs.txt"
-const requestDelay = 5 * time.Second
+const requestDelay = 5 * time.Second // 5 minutes
 
 func handleConfigAndLogsFiles() {
-	websitesFile, _ := os.Open(websitesFileName)
+	websitesFile, _ := os.Stat(websitesFileName)
 
 	if websitesFile == nil {
 		_, err := os.Create(websitesFileName)
 
 		if err != nil {
-			println(err)
+			println("Don't have permission to create file", websitesFileName)
 			os.Exit(1)
 		}
 	}
@@ -31,10 +31,16 @@ func handleConfigAndLogsFiles() {
 		_, err := os.Create(logsFileName)
 
 		if err != nil {
-			println(err)
+			println("Don't have permission to create file", logsFileName)
 			os.Exit(1)
 		}
 	}
+}
+
+func showMenu() {
+	println("Monitoring System")
+	println("1- Start monitoring")
+	println("2- End system")
 }
 
 func main() {
@@ -48,21 +54,12 @@ func main() {
 		case 1:
 			startMonitoring()
 		case 2:
-			showLogs()
-		case 3:
 			println("Ending system...")
 			break
 		default:
 			println("Invalid option. Try again")
 		}
 	}
-}
-
-func showMenu() {
-	println("Monitoring System")
-	println("1- Start monitoring")
-	println("2- Show logs")
-	println("3- End system")
 }
 
 func startMonitoring() {
@@ -126,8 +123,6 @@ func startMonitoring() {
 		time.Sleep(requestDelay)
 	}
 }
-
-func showLogs() {}
 
 func getOption() int {
 	var optionInputed int
